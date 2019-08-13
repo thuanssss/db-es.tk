@@ -1,0 +1,54 @@
+﻿@using DatabaseEnsoulSharp.Models.Database
+
+@model List<Champion>
+    @{
+    var user = ViewData["userModel"] as User;
+    }
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Database Ensoul Sharp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto"></ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" id="search-input" placeholder="Search" aria-label="Search">
+                @if (user == null)
+                {
+                <div class="nav-link">
+                    <div class="g-signin2" onclick="ClickLogin()" data-onsuccess="onSignIn"></div>
+                </div>
+                }
+                else
+                {
+                <div class="nav-link">
+                    <a class="g-signin2" hidden="hidden" id="logout" href="#">Logout</a>
+                    <p>@user.Email | <a onclick="signOut();" href="#">Logout</a></p>
+                </div>
+                }
+            </form>
+        </div>
+    </nav>
+
+    <article class="m-2" style="min-height: 800px;">
+        <div class="tab-pane fade show active" id="all-champion" role="tabpanel" aria-labelledby="all-champion-tab">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                <div class="col-md-1 col-sm-2 col-2 champion-item">
+                    <a data-check data-toggle="modal" href="/Home/ScriptForChampion?idChampion=@item.Id&championName=@item.Name" data-target="#modal-large">
+                        <div class="card" style="">
+                            <img class="card-img-top"
+                                 src="http://ddragon.leagueoflegends.com/cdn/9.11.1/img/champion/@(item.Name).png"
+                                 alt="@item.Name"
+                                 onerror="this.src='https://cdn.dribbble.com/users/1963449/screenshots/5915645/404_not_found_2x.png';">
+                            <div class="card-body">
+                                <p class="card-text name-champion">@item.Name</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                }
+            </div>
+        </div>
+    </article>

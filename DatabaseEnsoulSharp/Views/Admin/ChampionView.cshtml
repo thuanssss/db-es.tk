@@ -1,0 +1,51 @@
+﻿<div class="row" id="champion-view">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-body no-padding" id="create">
+                <form id="createForm" data-toggle="validator" role="form" class="lobi-form">
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input required="required" type="text" name="Slug" id="NameChampion" placeholder="Name Champion">
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <footer>
+                        <button class="btn btn-info btn-pretty">Create</button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-body" id="table">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    loadPage();
+
+    $("#createForm").submit(function (event) {
+        var model = {
+            Name: Site.getValueElement("#NameChampion")
+        }
+
+        Site.ajax("/Admin/ActionCreateChampion", JSON.stringify(model), function (res) {
+            loadPage();
+        });
+    });
+
+    function loadPage() {
+        Site.loadPartialView("#table",
+            "/Admin/TableChampion",
+            function () {
+                Site.table("#TableList", 350);
+            });
+    }
+</script>

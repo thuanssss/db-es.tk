@@ -1,0 +1,26 @@
+﻿@model List<DatabaseEnsoulSharp.Models.Database.ScriptInfo>
+<div>
+    <table id="TableList" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Author</th>
+                <th>Link</th>
+                <th>Name</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Author</td>
+                    <td><a target="_blank" href="https://github.com@(item.Link)">Github</a></td>
+                    <td>@item.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

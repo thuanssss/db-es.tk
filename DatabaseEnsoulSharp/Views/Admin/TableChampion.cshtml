@@ -1,0 +1,30 @@
+﻿@model List<DatabaseEnsoulSharp.Models.Database.Champion>
+<div>
+    <table id="TableList" class="display table table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Image</th>
+
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>
+                    <img class="card-img-top"
+                         style="width: 20px; height: 20px;"
+                         src="http://ddragon.leagueoflegends.com/cdn/9.11.1/img/champion/@(item.Name).png"
+                         alt="@item.Name" />
+                </td>
+
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>

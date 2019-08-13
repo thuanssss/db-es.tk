@@ -1,0 +1,69 @@
+﻿@{
+    var scripts = ViewData["scripts"] as List<SelectListItem>;
+    var champions = ViewData["champions"] as List<SelectListItem>;
+}
+
+<div class="row" id="champion-view">
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-body no-padding" id="create">
+                <form id="createForm" data-toggle="validator" role="form" class="lobi-form">
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.DropDownList("IdScript", scripts,
+                                        "Chọn Script",
+                                        new { @class = "chosen-demo form-control", required="required", tabindex="-1" })
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    @Html.DropDownList("IdChampion", champions,
+                                        "Chọn Champion",
+                                        new { @class = "chosen-demo form-control", required="required", tabindex="-1" })
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                    <footer>
+                        <button class="btn btn-info btn-pretty">Create</button>
+                    </footer>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-body" id="table">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    loadPage();
+
+    $("#createForm").submit(function (event) {
+        var model = {
+            IdScriptInfo: Site.getValueElement("#IdScript"),
+            IdChampion: Site.getValueElement("#IdChampion")
+        }
+
+        Site.ajax("/Admin/ActionCreateChampionScript", JSON.stringify(model), function (res) {
+            loadPage();
+        });
+    });
+
+    function loadPage() {
+        Site.singleSelect("#IdScript");
+        Site.singleSelect("#IdChampion");
+
+        Site.loadPartialView("#table",
+            "/Admin/TableChampionScript",
+            function () {
+                Site.table("#TableList", 350);
+            });
+    }
+</script>

@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row" id="main-load">
+
+</div>
+
+@section Scripts {
+    <script src="~/lobibox/js/plugin/select2/select2.min.js"></script>
+    <script src="~/lobibox/js/plugin/datatables/jquery.dataTables.js"></script>
+    <script src="~/lobibox/js/plugin/datatables/dataTables.bootstrap.js"></script>
+    <script src="~/lobibox/js/plugin/datatables/dataTables.responsive.js"></script>
+
+    <script>
+        $("#clickChampion").click(function () {
+            Site.loadPartialView("#main-load", "/Admin/ChampionView");
+        });
+        $("#clickScriptInfo").click(function () {
+            Site.loadPartialView("#main-load", "/Admin/ScriptView");
+        });
+        $("#clickChampionScript").click(function () {
+            Site.loadPartialView("#main-load", "/Admin/ChampionScriptView");
+        });
+    </script>
+}
+
+@section Styles{
+    <style>
+        select.select2 {
+            position: static !important;
+            outline: none !important;
+        }
+    </style>
+}

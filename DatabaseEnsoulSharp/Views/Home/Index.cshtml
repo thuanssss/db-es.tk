@@ -1,0 +1,8 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="main-champion" data-champion>
+    @await Html.PartialAsync("~/Views/Home/Jumbotron.cshtml")
+    @await Component.InvokeAsync("ChampionDetail")
+</div>
